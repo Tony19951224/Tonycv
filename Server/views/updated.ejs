@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= title%>
+    </title>
+    <script src="/jquery.js"></script>
+</head>
+
+<body>
+
+    <h1>
+        <%= title%>
+    </h1>
+
+    <form action="/revise/<%= data._id%>" class="revise" method="post">
+        数量
+        <input type="number" name="amount" required value="<%=data.amount%>" disabled>
+        <br>
+        <br> 票价
+        <input type="number" name="price" required value="<%=data.cost%>">
+        <br>
+        <br> 路径
+        <input type="text" name="url" required value="<%=data.url%>" disabled>
+        <br>
+        <br> 影名
+        <input type="text" name="name" required value="<%=data.filmname%>" disabled>
+        <br>
+        <br> 英文名
+        <input type="text" name="ename" required value="<%=data.ename%>" disabled>
+        <br>
+        <br> 类型
+        <input type="text" name="type" required value="<%=data.type%>" disabled>
+        <br>
+        <br> 片源
+        <input type="text" name="country" required value="<%=data.country%>"  disabled>
+        <br>
+        <br> 评分
+        <input type="number" name="score" required value="<%=data.score%>"  >
+        <br>
+        <br> 票房
+        <input type="number" name="record" required value="<%=data.record%>"  >
+        <br>
+        <br> 简介
+        <input type="text" name="intro" required value="<%=data.abstract%>" disabled> 
+        <input type="hidden" value="<%= data._id%>">
+        <button type="submit">修改</button>
+    </form>
+</body>
+<script>
+    $('.revise').submit(function (ev) {
+        ev.preventDefault();
+        var data = $(this).serialize();
+
+        var id = $('input[type=hidden]').val();
+        // console.log(id)
+
+        $.post('/revise/' + id, data, function (resData) {
+            if (resData.error == 1) {
+                alert(resData.message)
+                location.href = '/'
+            } else {
+                alert(resData.message)
+                location.href = '/'
+            }
+        })
+    })
+</script>
+
+</html>

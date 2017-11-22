@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= title%>
+    </title>
+    <script src="/jquery.js"></script>
+</head>
+
+<body>
+
+    <h1>更新</h1>
+
+    <form action="/update" class="add" method="post">
+        数量
+        <input type="number" name="amount" required>
+        <br>
+        <br> 票价
+        <input type="number" name="price" required>
+        <br>
+        <br> 路径
+        <input type="text" name="url" required>
+        <br>
+        <br> 影名
+        <input type="text" name="name" required>
+        <br>
+        <br> 英文名
+        <input type="text" name="ename" required>
+        <br>
+        <br> 类型
+        <input type="text" name="type" required>
+        <br>
+        <br> 片源
+        <input type="text" name="country" required>
+        <br>
+        <br> 评分
+        <input type="number" name="score" required>
+        <br>
+        <br> 票房
+        <input type="number" name="record" required>
+        <br>
+        <br> 简介
+        <input type="text" name="intro" required>
+
+        <button type="submit">上传</button>
+    </form>
+</body>
+<script>
+    // console.log($)
+    $('.add').submit(function (ev) {
+        ev.preventDefault();
+        var data = $(this).serialize();
+        // var data = new FormData(this);
+        console.log(data);
+        $.post({
+            url: '/update',
+            data: data,
+
+            success: function (resData) {
+                console.log(resData);
+                if (resData.error == 1) {
+                    alert('cuowu')
+                    location.href = '/'
+                } else {
+                    alert(resData.message)
+                    location.href = '/'
+                }
+            }
+        })
+    })
+</script>
+
+</html>

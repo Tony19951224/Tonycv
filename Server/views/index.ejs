@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/style.css">
+    <title>
+        <%= title%>
+    </title>
+</head>
+
+<body>
+    <h1>
+        <%= title%>
+    </h1>
+
+    <% if (aduser){ %>
+        <p>管理员 :
+            <%= aduser.adname%>
+        </p>
+        <p> <a href="/tuichu">退出</a></p>
+        <a href="/update">电影上传</a>
+        <% }  else { %>
+
+            <a href="/adzhuce">管理员注册</a>
+            <a href="/adlogin">管理员登录</a>
+
+            <% } %>
+
+                <div class="shopping">
+
+
+                    <ul>
+                        <% if(film.length >0)  {%>
+                            <% film.forEach(function(datas){ %>
+
+
+                                <li>
+
+
+                                    <% if(aduser){ %>
+                                        <div>
+                                           
+                                            <a href="/revise/<%= datas._id%>">修改</a>
+                                            <a href="/del/<%= datas._id%>">删除</a>
+
+
+                                        </div>
+                                        <% } %>
+
+                                            <img src="<%=datas.url%>" alt="">
+                                            <p>名称 :
+                                                <%= datas.filmname%>
+                                            </p>
+                                            <p>EN :
+                                                <%= datas.ename%>
+                                            </p>
+                                            <p>价格 :
+                                                <%= datas.cost%>
+                                            </p>
+                                            <p>票房 :
+                                                <%= datas.record%>
+                                            </p>
+                                            <p>评分 :
+                                                <%= datas.score%>
+                                            </p>
+                                            <p>片源 :
+                                                <%= datas.country%>
+                                            </p>
+                                            <p>类型 :
+                                                <%= datas.type%>
+                                            </p>
+                                            <p>
+                                                简介:
+                                                <%= datas.abstract%>
+                                            </p>
+                                </li>
+                                <% })%>
+                                    <%}%>
+
+
+                    </ul>
+
+
+
+
+                </div>
+
+</body>
+
+</html>
